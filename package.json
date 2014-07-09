@@ -19,7 +19,8 @@
     "should": "~4.0.4",
     "express-xml-domparser": "~0.0.2",
     "xml2json": "~0.4.0",
-    "mocha": "~1.20.1"
+    "mocha": "~1.20.1",
+    "stylus": "~0.47.1"
   },
   "devDependencies": {
   },
