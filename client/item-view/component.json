@@ -1,0 +1,19 @@
+{
+  "name": "item-view",
+  "description": "Item view",
+  "version": "0.0.1",
+  "dependencies": {
+    "component/classes": "*",
+    "component/domify": "*",
+    "component/view": "*",
+    "component/jquery": "*"
+  },
+  "development": {},
+  "scripts": [
+    "index.js",
+    "template.js"
+  ],
+  "styles": [
+    "style.css"
+  ]
+}
