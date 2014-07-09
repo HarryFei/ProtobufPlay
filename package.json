@@ -20,7 +20,16 @@
     "express-xml-domparser": "~0.0.2",
     "xml2json": "~0.4.0",
     "mocha": "~1.20.1",
-    "stylus": "~0.47.1"
+    "stylus": "~0.47.1",
+    "grunt": "~0.4.5",
+    "grunt-express": "~1.4.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-env": "~0.4.1",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-contrib-jade": "~0.12.0",
+    "grunt-mocha-test": "~0.11.0",
+    "grunt-contrib-watch": "~0.6.1"
   },
   "devDependencies": {
   },
