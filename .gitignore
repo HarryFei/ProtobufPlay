@@ -2,5 +2,8 @@ components
 build
 docs
 node_modules
+client/**/*.js
+client/**/*.css
+client/**/*.html
 *~
 #*#

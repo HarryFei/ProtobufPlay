@@ -5,6 +5,7 @@ favicon = require("serve-favicon")
 logger = require("morgan")
 cookieParser = require("cookie-parser")
 bodyParser = require("body-parser")
+xmldomparser = require('express-xml-domparser')
 
 app = express()
 
@@ -14,6 +15,7 @@ app.set "view engine", "jade"
 app.use favicon(__dirname + '/public/favicon.ico')
 app.use logger("dev")
 app.use bodyParser.json()
+app.use xmldomparser()
 app.use cookieParser()
 
 app.use express.static(path.join(__dirname, "build"))
@@ -39,6 +41,10 @@ app.get '/', (req, res) ->
 items = require("./server/items/route")
 app.use('/item', items)
 
+# xmldom
+xmlparse= require("./server/xmlparse")
+app.use('/xmlparse', xmlparse)
+
 
 # production error handler
 # no stacktraces leaked to user
@@ -50,11 +56,4 @@ app.use (err, req, res, next) ->
 
   return
 
-# bind
-app.listen 3000
-console.log "listening on 3000"
-
-
-
-
-
+module.exports = app

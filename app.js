@@ -1,2 +1,6 @@
 require('coffee-script/register');
-require('./app.coffee')
+var app = require('./app.coffee')
+
+app.listen(3000)
+console.log("listening on 3000")
+

@@ -1,0 +1,5 @@
+--require should
+--reporter spec
+--timeout 8000
+--slow 500
+--globals i
