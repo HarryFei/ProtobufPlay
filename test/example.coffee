@@ -7,28 +7,38 @@ ProtoBuf = require("protobufjs")
 builder = ProtoBuf.loadProtoFile(path.join(__dirname, "../protocol", "example.proto"))
 protocol = builder.build()
 
-describe "TEST_CONNECT", ->
-  data =  new protocol.com.trantect.Connect()
-  data.num = 1
-  it "TEST_POST_XML", (done) ->
-    options =
-      url: "http://127.0.0.1:5000/example"
-      headers:
-        "content-type": "application/octet-stream"
-      body: data.encodeNB()
+APP_URL_ROOT = "http://127.0.0.1:5000"
 
-      encoding: null
+proto_configs = require '../protocol/protocol'
 
-    request.post options, (error, response, body) ->
+describe "Api2", ->
+  setup_test = (proto) ->
 
-      should.not.exist error
-      
-      buffer = protocol.com.trantect.Ack.decode(body)
-      should(buffer.payload.toBuffer()).eql(new Buffer("hello"))
+    get_class = (root, class_name) ->
+      eval "root.#{class_name}"
 
-      done()
-      return
+    sent= get_class(protocol, proto.messageSentName)
+    receive= get_class(protocol, proto.messageReceivedName)
 
-    return
+    it "##{proto.url}", (done) ->
+      url = "#{APP_URL_ROOT}#{proto.url}"
+      options =
+        url: url
+        headers:
+          "content-type": "application/octet-stream"
+        body: (new sent()).encodeNB()
+        encoding: null
 
-  return
+      request.post options, (error, response, body) ->
+    
+        should.not.exist error
+        buffer = receive.decode(body)
+        should(buffer).not.equal(null)
+        should(buffer).eql(new receive())
+
+        done()
+    
+  for p in proto_configs
+    setup_test(p)
+
+

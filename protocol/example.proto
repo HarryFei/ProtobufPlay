@@ -1,11 +1,18 @@
 package com.trantect;
 
 message Connect {
-  optional float num = 1;
-  optional bytes payload = 2;
+  optional string ip = 1 [default="127.0.0.1"];
+  optional int32 port = 2;
 }
 
 message Ack{
-  optional float num = 1;
-  optional bytes payload =2;
+  optional int32 error= 1[default=0];
+}
+
+message Login {
+  required string username = 1 [default="hello"];
+  required string password = 2 [default="1234"];
+}
+message LoginResult {
+  optional int32 error = 1;
 }

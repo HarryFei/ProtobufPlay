@@ -5,5 +5,12 @@
     "messageFilePath": "example.proto",
     "messageSentName": "com.trantect.Connect",
     "messageReceivedName": "com.trantect.Ack"
+  },
+  {
+    "url": "/login",
+    "method": "get",
+    "messageFilePath": "example.proto",
+    "messageSentName": "com.trantect.Login",
+    "messageReceivedName": "com.trantect.LoginResult"
   }
 ]

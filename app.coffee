@@ -27,14 +27,6 @@ app.use (req, res, next) ->
     req.rawBody = data
     next()
 
-#   data = new Buffer('')
-#   req.on "data", (chunk) ->
-#     data = Buffer.concat [data,chunk]
-
-#     # req.removeListener("end")
-#   req.once "end", ->
-#     req.test = data
-#   next()
 
 app.use bodyParser.json()
 app.use xmldomparser()
@@ -65,16 +57,23 @@ builder = ProtoBuf.loadProtoFile(path.join(__dirname, "protocol", "example.proto
 protocol = builder.build()
 
 
-  
-app.post '/example', (req, res) ->
+proto_configs = require './protocol/protocol'
 
-  protocol.com.trantect.Connect.decode(req.rawBody)
 
-  ret = new protocol.com.trantect.Ack()
-  ret.num = 1
-  ret.payload = "hello";
-  buffer = ret.encodeNB()
-  res.send(buffer)
+setup_router = (proto) ->
+  get_class = (root, class_name) ->
+     eval "root.#{class_name}"
+
+  sent= get_class(protocol, proto.messageSentName)
+  receive= get_class(protocol, proto.messageReceivedName)
+
+  app.post proto.url, (req, res) ->
+    sent.decode(req.rawBody)
+    ret = new receive()
+    res.send(ret.encodeNB())
+
+for p in proto_configs
+  setup_router(p)
 
 # items
 items = require("./server/items/route")
