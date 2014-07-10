@@ -1,0 +1,9 @@
+[
+  {
+    "url": "/example",
+    "method": "post",
+    "messageFilePath": "example.proto",
+    "messageSentName": "com.trantect.Connect",
+    "messageReceivedName": "com.trantect.Ack"
+  }
+]
